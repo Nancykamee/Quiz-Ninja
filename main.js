@@ -6,10 +6,19 @@ const quiz = [
 
 // View Object
 const view = {
+  start: document.getElementById('start'),
   score: document.querySelector('#score strong'),
   question: document.getElementById('question'),
   result: document.getElementById('result'),
   info: document.getElementById('info'),
+
+  show(element) {
+    event.style.display = 'block';
+  },
+  hide(element) {
+    element.style.display = 'none'
+  },
+
   render(target,content,attributes) {
   for(const key in attributes) {
   target.setAttribute(key, attributes[key]);
@@ -52,8 +61,11 @@ const game = {
   },
 
   gameOver() {
+    view.show(view.start);
     view.render(`Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
   }
 }
 
 game.start(quiz);
+view.hide(view.start);
+view.start.addEventListener('click', () => game.start(quiz), false);
