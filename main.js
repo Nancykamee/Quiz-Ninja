@@ -1,25 +1,23 @@
-alert('Welcome to Quiz Ninja!');// introduction to quiz Ninja
-
 const quiz = [
   { name: "Superman", realName: "Clark Kent" },
   { name: "Wonder Woman", realName: "Diana Prince" },
-  { name: "Batman", realName: "Bruce Wayne" }, // objects inside an array
+  { name: "Batman", realName: "Bruce Wayne" },
 ];
 
-//view object
+// View Object
 const view = {
   score: document.querySelector('#score strong'),
   question: document.getElementById('question'),
   result: document.getElementById('result'),
   info: document.getElementById('info'),
-  render(target, content, attributes) {
-    for (const key in attributes) {
-      target.setAttribute(key, attributes[key]);
-    }
-    target.innerHTML = content;
+  render(target,content,attributes) {
+  for(const key in attributes) {
+  target.setAttribute(key, attributes[key]);
   }
-};
-
+  target.innerHTML = content;
+  }
+  };
+ 
 const game = {
   start(quiz) {
     this.questions = [...quiz];
@@ -29,7 +27,7 @@ const game = {
       this.question = question;
       this.ask();
     }
-    //end of main game loop
+    //end of game loop
     this.gameOver();
   },
 
@@ -43,18 +41,18 @@ const game = {
   check(response) {
     const answer = this.question.realName;
     if (response === answer) {
-      view.render(view.result, 'Correct!', {'class': 'correct'});
+      view.render(view.result,'Correct!', {'class': 'correct'});
       alert('Correct!');
-      this.score++
+      this.score++;
       view.render(view.score, this.score);
     } else {
-      view.render(view.result, `Wrong! The correct answer was ${answer}`, {'class':'wrong'});
+      view.render(view.result, `wrong! The correct answer was ${answer}`, {'class': 'wrong'});
       alert(`Wrong! The correct answer was ${answer}`);
     }
   },
 
   gameOver() {
-    view.render(view.info, `Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
+    view.render(`Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
   }
 }
 
