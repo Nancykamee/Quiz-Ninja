@@ -7,10 +7,10 @@ const quiz = [
 // View Object
 const view = {
   score: document.querySelector('#score strong'),
-  question: document.getElementById('question'),
-  result: document.getElementById('result'),
-  info: document.getElementById('info'),
-  start: document.getElementById('start'),
+  question: document.getElementById('#question'),
+  result: document.getElementById('#result'),
+  info: document.getElementById('#info'),
+  start: document.getElementById('# start'),
   response: document.querySelector('#response'),
   timer: document.querySelector('#timer strong'),
   render(target, content, attributes) {
@@ -20,11 +20,11 @@ const view = {
     target.innerHTML = content;
   },
 
-  show(element) {
+  show(element){
     element.style.display = 'block';
   },
   hide(element) {
-    element.style.display = 'none'
+    element.style.display = 'none';
   },
 
   setup() {
@@ -51,11 +51,13 @@ const view = {
 };
 
 const game = {
-  start(quiz) {
-    console.log('start() invoked' );
+  start(quiz){
+    console.log('start() invoked');
     this.score = 0
     this.questions = [...quiz];// copies the quiz array
-    view.setup();//
+    this.secondsRemaining = 20;
+    this.timer = setInterval(this.countdown , 1000 );
+    view.setup();
     this.ask();
   },
 
@@ -89,7 +91,7 @@ const game = {
 
   gameOver() {
     console.log('gameOver() invoked' )
-    view.show(view.start);
+    //view.show(view.start);
     view.render(`Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
     view.teardown();
     clearInterval(this.timer);
@@ -98,7 +100,7 @@ const game = {
   countdown() {
     game.secondsRemaining--;
     view.render(view.timer, game.secondsRemaining);
-    if (game.secondsRemaining < 0) {
+    if (game.secondsRemaining <= 0) {
       game.gameOver()
     }
   }
