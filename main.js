@@ -52,6 +52,7 @@ const view = {
 
 const game = {
   start(quiz) {
+    console.log('start() invoked' );
     this.score = 0
     this.questions = [...quiz];// copies the quiz array
     view.setup();//
@@ -59,6 +60,7 @@ const game = {
   },
 
   ask(name) {
+    console.log('ask() invoked')
     if (this.question.length > 0) {
       this.question = this.questions.pop();
       const question = `What is ${this.question.name}'s real name?`;
@@ -70,6 +72,7 @@ const game = {
   },
 
   check(event) {
+    console.log('check(event) invoked')
     event.preventDefault();
     const response = view.response.answer.value;
     const answer = this.question.realName;
@@ -85,6 +88,7 @@ const game = {
   },
 
   gameOver() {
+    console.log('gameOver() invoked' )
     view.show(view.start);
     view.render(`Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
     view.teardown();
