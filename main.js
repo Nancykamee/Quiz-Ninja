@@ -4,6 +4,20 @@ const quiz = [
   { name: "Batman", realName: "Bruce Wayne" },
 ];// array in an object
 
+function random(a, b=1){ 
+  //if only 1 argument is provided,we need to swap the values of a and b
+  if (b === 1) {
+    [a,b] = [b,a];
+  }
+  return Math.floor(b-a+1) * Math.random() + a;
+}
+
+function shuffle(array) {
+  for(let i = array.length; i; i--) {
+    let j = random(i)-1;
+    [array[i -1], array[j]] = [array[j],  array[i - 1]];
+  }
+}
 // View Object
 const view = {
   score: document.querySelector('#score strong'),
@@ -64,6 +78,7 @@ const game = {
   ask(name) {
     console.log('ask() invoked')
     if (this.question.length > 0) {
+      shuffle(this.questions);
       this.question = this.questions.pop();
       const question = `What is ${this.question.name}'s real name?`;
       view.render(view.question, question);
