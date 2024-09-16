@@ -125,6 +125,15 @@ const game = {
     view.render(view.info, `Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
     view.teardown();
     clearInterval(this.timer);
+  },
+
+  hiScore(){
+    const hi = localStorage.getItem('highScore') || 0;
+    if(this.score > hi || hi === 0) {
+      localStorage.setItem('highScore', this.score);
+      // ** NEW HIGH SCORE! **')
+    }
+    return localStorage.getItem('highScore');
   }
 }
 
